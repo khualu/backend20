@@ -1,2 +1,2 @@
-# backend20
-Repository for the backend course of CMD Amsterdam. 
+# Datingsite LF>DATE
+Repository for the backend course and project of CMD Amsterdam. 
