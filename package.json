@@ -1,0 +1,19 @@
+{
+  "name": "boilerplate_node",
+  "version": "1.0.0",
+  "description": "Boilerplate to be used in Nodejs with Express for the making of a datingsite / webapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "author": "Andres Pinto",
+  "license": "ISC",
+  "dependencies": {
+    "camelcase": "^5.3.1",
+    "express": "^4.17.1"
+  }
+}
