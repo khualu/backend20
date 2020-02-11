@@ -3,13 +3,13 @@ body {
   background-color: black;
 }
 
-body body h1 {
+body h1 {
   font-family: 'VT323', monospace;
   font-size: 5em;
   color: white;
 }
 
-body body p {
+body p {
   font-family: 'Ubuntu', sans-serif;
   color: white;
 }
