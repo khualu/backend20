@@ -2,7 +2,7 @@
 
 ## Concepts for potential dating sites
 * **"LF>DATE"**, Dating site aiming for finding partners on common gaming interests or experiences.
-... The concept focusses on finding common interests in the gaming world, so people can first meet each other online. The first goal of finding a partner is making a "gaming date", afterwards the users can choose to possibly see each other in real life. 
+... The concept focusses on finding common interests in the gaming world, so people can fi rst meet each other online. The first goal of finding a partner is making a "gaming date", afterwards the users can choose to possibly see each other in real life. 
 * **"ANIDATE"**, dating focussed on weeb/weeaboo culture, stuff like japanese popculture, anime, manga, cosplay and japanese food.
 ... This could potentially be combined with the gaming dating site. 
 * **"Scattered"**, the point of this concept is that you cannot post pictures of your whole body. The pictures that represent you need to be "scattered".  
@@ -175,18 +175,27 @@ _Specially if I'm going to focus on the gaming scene I think it's very important
 * Show twitch profile
 * Discord connectivity
 
+### Fun interactions between users
+* ranking
+* liking
+* poking
+* playing minigames
 
-ranking
-liking
-poking
-playing minigames
-......
-Create a Style Guide
 
-Create a style guide where you define at least the following parts
+# Create a Style Guide
+_Create a style guide where you define at least the following parts._
 
-Logo('s)
-Color palette('s)
-Fonts
-Icons
-Visuals and photography
+* Logo('s)
+* Color palette('s)
+* Fonts
+* Icons
+* Visuals and photography
+
+## Inspiration for the style guide
+
+![Inspiration image](https://soundontime.com/wp-content/uploads/2019/04/Vaporwave-Tips.jpeg)
+![Inspiration image](https://f4.bcbits.com/img/0017910051_0.png)
+![Inspiration image](https://imgur.com/dU4MqGX.png)
+![Inspiration image](https://www.hipsthetic.com/wp-content/uploads/2016/02/No-Sleep.jpg)
+
+![Style guide Aito](https://imgur.com/kthf4jS.png)
