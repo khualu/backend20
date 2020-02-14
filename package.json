@@ -2,9 +2,10 @@
   "name": "boilerplate_node",
   "version": "1.0.0",
   "description": "Boilerplate to be used in Nodejs with Express for the making of a datingsite / webapp",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "nodemon main",
+    "test": "node main"
   },
   "keywords": [
     "nodejs",
@@ -14,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "camelcase": "^5.3.1",
+    "ejs": "^3.0.1",
     "express": "^4.17.1"
   },
   "devDependencies": {

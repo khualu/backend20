@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu|VT323&display=swap");
+body {
+  background-color: black;
+}
+
+body h1 {
+  font-family: 'VT323', monospace;
+  font-size: 5em;
+  color: white;
+}
+
+body p {
+  font-family: 'Ubuntu', sans-serif;
+  color: white;
+}
+/*# sourceMappingURL=style.css.map */
