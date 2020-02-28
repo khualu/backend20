@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<%- include ('../partials/head') %>
 </head>
+
 <body class="container">
 
 	<header>
@@ -16,9 +18,14 @@
 		</div>
 	</main>
 
-	<section>
+	<section id="topGames">
 		<h2>Your favorite games</h2>
 
+		<ul>
+			<li><%= game1 %></li>
+			<li><%= game2 %></li>
+			<li><%= game3 %></li>
+		</ul>
 	</section>
 
 	<section>
@@ -27,17 +34,18 @@
 			<input type="text" id="game1" name="game1">
 
 			<label for="game2">Your 2nd favorite game:</label>
-			<input type="text" id="game2" name="name2">
+			<input type="text" id="game2" name="game2">
 
 			<label for="game3">Your 3th favorite game:</label>
-			<input type="text" id="game3" name="name3">
-			<input type="submit"> 
+			<input type="text" id="game3" name="game3">
+			<input type="submit">
 		</form>
-	</section> 
+	</section>
 
 	<footer>
 		<%- include ('../partials/footer') %>
 	</footer>
-	
+
 </body>
+
 </html>
