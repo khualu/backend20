@@ -1,13 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Ubuntu|VT323&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Kosugi|Noto+Serif+JP&display=swap');
 
 body {
 
   h1 {
-    font-family: 'VT323', monospace;
+    font-family: 'Kosugi';
     font-size: 5em;
+    background-color: pink; 
   }
 
-  p {
-    font-family: 'Ubuntu', sans-serif;
+  p , li {
+    font-family: 'Noto Serif JP';
+    font-size: 1em;
   }
 }
