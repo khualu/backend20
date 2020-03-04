@@ -197,5 +197,181 @@ _Create a style guide where you define at least the following parts._
 ![Inspiration image](https://f4.bcbits.com/img/0017910051_0.png)
 ![Inspiration image](https://imgur.com/dU4MqGX.png)
 ![Inspiration image](https://www.hipsthetic.com/wp-content/uploads/2016/02/No-Sleep.jpg)
-
 ![Style guide Aito](https://imgur.com/kthf4jS.png)
+
+
+
+# WEEK 2
+## Engine template
+For this weeks assignment I started by looking at different template engines. After the first week I was already checking some of them, because I had the static site done very quickly. I checked the engines that were described in the weekly assignments. These were `PUG`, `Handlebars` and `EJS`. The research I did was a bit short. This was because I decided to do some superficial research and just start working in the engine I choose. I tend to spend too much time reaserching and then getting stuck on the actual work. I choose EJS in the end because it's the engine I've seen been used the most online and at CMDA. I found `Pug` a bit hard to follow. The same with `handlebars`. 
+
+At first, handlebars looks very easy to use. Way easier than Pug or EJS. This tempted me at first to use this engine. But it was the installation that threw me off. Instead of using the engine in the `server.js`, you just link it in the HTML file. So I decided to skip this one. 
+![HANDLEBARS EXPRESSIONS](https://imgur.com/IxRkfSx.png)
+![HANDLEBARS EXPRESSIONS](https://imgur.com/GAlM1b3.png)
+
+Everything about Pug threw me off, so this was a rather quick decision. EJS is visually way more cluttered than Pug or Handlebars, but it also makes it easier to understand what elements you're using and what you're doing. So the choice for EJS was made. 
+![Pug USE](https://imgur.com/T1B0rMm.png)
+
+
+## Dynamic site
+So, after deciding to use EJS, I started coding away. This was an easy step to make, since the site I made already was using `express.static()`. The `server.js` needed some small changes, that are shown here:
+
+```js
+const ejs = require('ejs');
+
+// EJS TEMPLATE SERVER
+app.set('view engine', 'ejs');
+app.use(express.static('src'));
+
+// INDEX PAGE
+app.get('/', function(req, res) {
+    // res.render('pages/index.ejs', games);
+    res.render('pages/index.ejs', games);
+})
+// ABOUT PAGE
+app.get('/about', function(req, res) {
+    res.render('pages/about.ejs');
+})
+```
+
+This is the structure of the project. I made the standard partials that are used with templates. 
+![Pug USE](https://imgur.com/lcJ3Ovv.png)
+
+
+# Week 3
+This is the moment where we start to build the feature that is our jobstory. Last week I worked out a couple of wireframes so that it's clear for myself what I intend to do. I noticed that what I had designed (from a UX P.O.V), was way too technical too make. I'll be making the same feature. But instead of it being in 1 page that refreshes, I will be making the feature in different `HTML/EJS` pages. 
+
+The first step I took was reading the description of this weeks assignment for Backend, since it is a good lead to start working from that point on. So, extracted the base thought of my jobstory. The most down to base form of my jobstory would be to let users write down their favorite games, so on their turn, these games would be rendered and shown. They also would need to be (at least) temporarily saved somewhere on the server. Now that I've decided what all the functionalities were that I needed I was ready to start doing some research on how-to's and start coding. 
+
+## The POST request
+A first start at the assignment was this video. It really helped me understand the code and what I was looking for to make in `NodeJS`. The maker of the video put down a very basic form of creating a `POST` request. Afterwards I had to look for a way to also save the games that were given by the users into a `json` file. At first I tried so save it in the `server.js`, but that was not working. I guess it is possible to do this. But I found fairly soon a way to create a `games.json` and render a `ejs` partial from there. 
+
+[![](http://img.youtube.com/vi/vKlybue_yMQ/0.jpg)](http://www.youtube.com/watch?v=vKlybue_yMQ "POST Request Tutorial")
+
+```js
+// SERVER.JS 
+const bodyParser = require('body-parser');
+const fs = require('fs');
+
+// IMPORT GAMES.JSON FILE
+const games = require('./views/pages/game.json');
+
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+app.use(bodyParser.json());
+
+
+// POST FAVORITE GAME
+app.post('/', function(req, res) {
+    // console.log((JSON.stringify(req.body)));
+    let testGame = req.body;
+    console.log(testGame);
+
+    saveGame(testGame, function(err) {
+        if(err) {
+            res.status(404).send('Game not send');
+            return;
+        } 
+        // console.log("Your games are saved");
+        // res.render('pages/index.ejs', games)
+        res.send("Your games are saved");
+    })
+})
+
+function saveGame(testGame, cb) {
+    fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
+}
+```
+
+```html
+	<section id="topGames">
+		<h2>Your favorite games</h2>
+
+		<ul>
+			<li><%= game1 %></li>
+			<li><%= game2 %></li>
+			<li><%= game3 %></li>
+		</ul>
+	</section>
+```
+
+# Week 4
+
+## Playground
+## Different types of databases
+There are a lot of different types of databases, but for the sake of long reads and time I'm gonna be naming some of the ones I know, and that would be usable for this project. 
+
+### Relatinal databases
+These databases are categorized by a set of tables where data gets fit into a pre-defined category. The table consists of rows and columns where the column has an entry for data for a specific category and rows contains instance for that data defined according to the category. The Structured Query Language (SQL) is the standard user and application program interface for a relational database.
+![Relatinal database](https://www.tutorialspoint.com/assets/questions/images/112548-1532342000.jpg)
+
+### Cloud databases
+Now a day, data has been specifically getting stored over clouds also known as a virtual environment, either in a hybrid cloud, public or private cloud. A cloud database is a database that has been optimized or built for such a virtualized environment. There are various benefits of a cloud database, some of which are the ability to pay for storage capacity and bandwidth on a per-user basis, and they provide scalability on demand, along with high availability.
+
+_This is more or less what Mongo Atlas is._
+![Relatinal database](https://www.tutorialspoint.com/assets/questions/images/112415-1532342015.jpg)
+
+### NoSQL database
+These are used for large sets of distributed data. There are some big data performance issues which are effectively handled by relational databases, such kind of issues are easily managed by NoSQL databases. There are very efficient in analyzing large size unstructured data that may be stored at multiple virtual servers of the cloud.
+
+_This is what I'm momenteraly using in Mongo Atlas. This is an unstructured database._
+
+### Perosnal database
+Data is collected and stored on personal computers which is small and easily manageable. The data is generally used by the same department of an organization and is accessed by a small group of people. 
+
+_This can also be used for prototyping, until you actually need a database that can be used by bigger groups of users._
+
+## Connect
+I decided to use MongoDB Atlas, since it's always available because it's a cloud service and the choice for prototyping is totally free. I got to say, in the end it was fairly easy to connect and get data send to the database. 
+
+```js
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+
+// DATA BASE CONNECTION
+const uri = process.env.DB_URI;
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('MongoDB connected...');
+});
+
+// SCHEMA MAKING FOR DB || TESTING 
+const Schema = mongoose.Schema;
+
+const favGamesSchema = new Schema({
+    title: String,
+    body: String,
+    date: {
+        type: String,
+        default: Date.now()
+    }
+})
+
+// MODEL || TESTING
+const favGames = mongoose.model('FavGames', favGamesSchema);
+
+// SAVING DATA TO DATABASE || TEST
+const data = {
+    title: 'Favorite game 1#',
+    body: 'Overwatch'
+}
+
+// .save SAVING METHOD || TEST
+const newFavGames = new favGames(data);
+
+newFavGames.save((err) => {
+    if (err) {
+        console.log("Something went wrong saving the data...");
+    } else {
+        console.log("Data has been succesfully saved!");
+    }
+})
+```
+
+
+## Storage
+Now it's time to make users be able to store data in the server and then the server to display this data. 

@@ -2,11 +2,58 @@ const path = require('path');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const mongoose = require('mongoose');
 
+require('dotenv').config();
 
 const express = require('express');
 const app = express();
 const port = 3000;
+
+// DATE TEST
+
+// DATA BASE CONNECTION
+const uri = process.env.DB_URI;
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => {
+    console.log('MongoDB connected...');
+});
+
+
+// SCHEMA MAKING FOR DB || TESTING 
+const Schema = mongoose.Schema;
+
+const favGamesSchema = new Schema({
+    title: String,
+    body: String,
+    date: {
+        type: String,
+        default: Date.now()
+    }
+})
+
+// MODEL || TESTING
+const favGames = mongoose.model('FavGames', favGamesSchema);
+
+// SAVING DATA TO DATABASE || TEST
+const data = {
+    title: 'Favorite game 1#',
+    body: 'Overwatch'
+}
+
+// .save SAVING METHOD || TEST
+const newFavGames = new favGames(data);
+
+newFavGames.save((err) => {
+    if (err) {
+        console.log("Something went wrong saving the data...");
+    } else {
+        console.log("Data has been succesfully saved!");
+    }
+})
+
 
 // IMPORT GAMES.JSON FILE
 const games = require('./views/pages/game.json');
@@ -57,17 +104,8 @@ app.listen(port);
 console.log(`Server is listening to ${port}`);
 
 
+// FUNCTION: SAVING GAMES 
 function saveGame(testGame, cb) {
     fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
 }
 
-
-// let test = {
-//     people: [
-//         {name: 'dave'},
-//         {name: 'tortilla'}
-//     ]
-// };
-// http://localhost:3000/static/index.html
-// http://localhost:3000/static/about.html
-// http://localhost:3000/static/images/animu.jpg
