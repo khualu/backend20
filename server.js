@@ -1,3 +1,10 @@
+// // RESTful API manner
+// GET /events              // list the events
+// GET /events/:eventId     // get a single event by ID
+// POST /events             // add a new event
+// PUT /events/:eventId     // update an existing event
+// DELETE /events/:eventId  // remove an event
+
 const path = require('path');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
@@ -10,8 +17,6 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-// DATE TEST
-
 // DATA BASE CONNECTION
 const uri = process.env.DB_URI;
 mongoose.connect(uri, {
@@ -21,39 +26,21 @@ mongoose.connect(uri, {
     console.log('MongoDB connected...');
 });
 
-
-// SCHEMA MAKING FOR DB || TESTING 
+// SCHEMA MAKING FOR DB
 const Schema = mongoose.Schema;
 
 const favGamesSchema = new Schema({
-    title: String,
-    body: String,
+    titleGame1: String,
+    titleGame2: String,
+    titleGame3: String,
     date: {
         type: String,
         default: Date.now()
     }
 })
 
-// MODEL || TESTING
+// MODEL
 const favGames = mongoose.model('FavGames', favGamesSchema);
-
-// SAVING DATA TO DATABASE || TEST
-const data = {
-    title: 'Favorite game 1#',
-    body: 'Overwatch'
-}
-
-// .save SAVING METHOD || TEST
-const newFavGames = new favGames(data);
-
-newFavGames.save((err) => {
-    if (err) {
-        console.log("Something went wrong saving the data...");
-    } else {
-        console.log("Data has been succesfully saved!");
-    }
-})
-
 
 // IMPORT GAMES.JSON FILE
 const games = require('./views/pages/game.json');
@@ -79,18 +66,28 @@ app.get('/about', function(req, res) {
 
 // POST FAVORITE GAME
 app.post('/', function(req, res) {
-    // console.log((JSON.stringify(req.body)));
+    // sanity check
     let testGame = req.body;
-    console.log(testGame);
 
-    saveGame(testGame, function(err) {
-        if(err) {
-            res.status(404).send('Game not send');
+    // Describe what value correspons in which key
+    let gameData = {
+        titleGame1: req.body.titleGame1,
+        titleGame2: req.body.titleGame2,
+        titleGame3: req.body.titleGame3
+    }
+    // Define a new model
+    const newFavGames = new favGames(gameData);
+
+    // use .save function to send data to db
+    newFavGames.save((err) => {
+        if (err) {
+            console.log('Could not save games')
+            res.status(400).send('Games were not saved')
             return;
-        } 
-        // console.log("Your games are saved");
-        // res.render('pages/index.ejs', games)
-        res.send("Your games are saved");
+        } else {
+            console.log('Games succesfully saved')
+            res.send("Your games were succesfully uploaded to the database")
+        }
     })
 })
 
@@ -104,8 +101,8 @@ app.listen(port);
 console.log(`Server is listening to ${port}`);
 
 
-// FUNCTION: SAVING GAMES 
-function saveGame(testGame, cb) {
-    fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
-}
+// // FUNCTION: SAVING GAMES 
+// function saveGame(testGame, cb) {
+//     fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
+// }
 
