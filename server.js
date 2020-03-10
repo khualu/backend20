@@ -9,6 +9,7 @@
 // const ejs = require('ejs')
 // const fs = require('fs')
 
+const format = require('date-format')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
@@ -18,33 +19,29 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+// MODULAR FUNCTIONS
+const dbconnect = require('./mongoCon')
+
 // DATA BASE CONNECTION
-const uri = process.env.DB_URI
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('MongoDB connected...')
-})
+dbconnect()
 
 // SCHEMA MAKING FOR DB
 const Schema = mongoose.Schema
 
 const favGamesSchema = new Schema({
+  userName: String,
   titleGame1: String,
   titleGame2: String,
   titleGame3: String,
   date: {
     type: String,
+    read: format('dd/MM/yy hh.mm.ss', new Date()),
     default: Date.now()
   }
 })
 
 // MODEL
 const favGames = mongoose.model('FavGames', favGamesSchema)
-
-// IMPORT GAMES.JSON FILE
-const games = require('./views/pages/game.json')
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -57,8 +54,8 @@ app.use(express.static('src'))
 
 // INDEX PAGE
 app.get('/', function (req, res) {
-  // res.render('pages/index.ejs', games);
-  res.render('pages/index.ejs', games)
+  // NEED TO GET THE PAGE TO RENDER DATA FROM DB
+  // res.render('pages/index.ejs', games)
 })
 // ABOUT PAGE
 app.get('/about', function (req, res) {
@@ -77,6 +74,7 @@ app.post('/', function (req, res) {
     titleGame3: req.body.titleGame3
   }
   // Define a new model
+  // eslint-disable-next-line new-cap
   const newFavGames = new favGames(gameData)
 
   // use .save function to send data to db
@@ -99,8 +97,3 @@ app.get('*', function (req, res) {
 // WHICH PORT
 app.listen(port)
 console.log(`Server is listening to ${port}`)
-
-// // FUNCTION: SAVING GAMES
-// function saveGame(testGame, cb) {
-//     fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
-// }
