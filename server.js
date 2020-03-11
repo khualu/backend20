@@ -1,53 +1,26 @@
-// // RESTful API manner
-// GET /events              // list the events
-// GET /events/:eventId     // get a single event by ID
-// POST /events             // add a new event
-// PUT /events/:eventId     // update an existing event
-// DELETE /events/:eventId  // remove an event
-
-// const path = require('path')
-// const ejs = require('ejs')
-// const fs = require('fs')
-
+// SETUP & NODE MODULES
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
-
 require('dotenv').config()
-
 const express = require('express')
 const app = express()
 const port = 3000
 
-// DATA BASE CONNECTION
-// const uri = process.env.DB_URI
-// mongoose.connect(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// }).then(() => {
-//   console.log('MongoDB connected...')
-// })
-const dbconnect = require('./mongoCon')
-dbconnect()
-
-// SCHEMA MAKING FOR DB
-const Schema = mongoose.Schema
-
-const favGamesSchema = new Schema({
-  titleGame1: String,
-  titleGame2: String,
-  titleGame3: String,
-  date: {
-    type: String,
-    default: Date.now()
-  }
-})
-
-// MODEL
-const favGames = mongoose.model('FavGames', favGamesSchema)
+// MODULES
+const dbconnect = require('./modules/mongoCon')
+const gamesModel = require('./modules/gamesModel')
+const postGames = require('./modules/postGames')
+const searchUser = require('./modules/searchUser')
 
 // IMPORT GAMES.JSON FILE
 const games = require('./views/pages/game.json')
 
+// DATA BASE CONNECTION
+dbconnect()
+
+// TESTING QUERIES
+searchUser()
+
+// setting up bodyParser
 app.use(bodyParser.urlencoded({
   extended: true
 }))
@@ -59,7 +32,6 @@ app.use(express.static('src'))
 
 // INDEX PAGE
 app.get('/', function (req, res) {
-  // res.render('pages/index.ejs', games);
   res.render('pages/index.ejs', games)
 })
 // ABOUT PAGE
@@ -67,31 +39,13 @@ app.get('/about', function (req, res) {
   res.render('pages/about.ejs')
 })
 
-// POST FAVORITE GAME
-app.post('/', function (req, res) {
-// sanity check
-//   const testGame = req.body
-
-  // Describe what value correspons in which key
-  const gameData = {
-    titleGame1: req.body.titleGame1,
-    titleGame2: req.body.titleGame2,
-    titleGame3: req.body.titleGame3
-  }
-  // Define a new model
-  const newFavGames = new favGames(gameData)
-
-  // use .save function to send data to db
-  newFavGames.save((err) => {
-    if (err) {
-      console.log('Could not save games')
-      res.status(400).send('Games were not saved')
-    } else {
-      console.log('Games succesfully saved')
-      res.send('Your games were succesfully uploaded to the database')
-    }
-  })
+// MYGAMES PAGE
+app.get('/mygames', function (req, res) {
+  res.render('pages/mygames.ejs', games)
 })
+
+// POST FAVORITE GAME
+app.post('/', postGames)
 
 // CATCH REST REDIRECT TO HOME
 app.get('*', function (req, res) {
@@ -106,3 +60,14 @@ console.log(`Server is listening to ${port}`)
 // function saveGame(testGame, cb) {
 //     fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
 // }
+
+// // RESTful API manner
+// GET /events              // list the events
+// GET /events/:eventId     // get a single event by ID
+// POST /events             // add a new event
+// PUT /events/:eventId     // update an existing event
+// DELETE /events/:eventId  // remove an event
+
+// const path = require('path')
+// const ejs = require('ejs')
+// const fs = require('fs')
