@@ -19,13 +19,15 @@ const app = express()
 const port = 3000
 
 // DATA BASE CONNECTION
-const uri = process.env.DB_URI
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('MongoDB connected...')
-})
+// const uri = process.env.DB_URI
+// mongoose.connect(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// }).then(() => {
+//   console.log('MongoDB connected...')
+// })
+const dbconnect = require('./mongoCon')
+dbconnect()
 
 // SCHEMA MAKING FOR DB
 const Schema = mongoose.Schema
