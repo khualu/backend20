@@ -14,7 +14,4 @@ const favGamesSchema = new Schema({
   }
 })
 
-// MODEL
-// const favGames = mongoose.model('FavGames', favGamesSchema)
-
 module.exports = mongoose.model('gamesModel', favGamesSchema)
