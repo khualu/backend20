@@ -20,54 +20,17 @@ dbconnect()
 // TESTING QUERIES
 searchUser()
 
-// setting up bodyParser
-app.use(bodyParser.urlencoded({
-  extended: true
-}))
-app.use(bodyParser.json())
+// SERVER SETUP
+app
+  .use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.json())
+  .set('view engine', 'ejs')
+  .use(express.static('src'))
+  .get('/', function (req, res) { res.render('pages/index.ejs', games) })
+  .get('/about', function (req, res) { res.render('pages/about.ejs') })
+  .get('/mygames', function (req, res) { res.render('pages/mygames.ejs', games) })
+  .post('/', postGames)
+  .get('*', function (req, res) { res.redirect('/') })
+  .listen(port)
 
-// EJS TEMPLATE SERVER
-app.set('view engine', 'ejs')
-app.use(express.static('src'))
-
-// INDEX PAGE
-app.get('/', function (req, res) {
-  res.render('pages/index.ejs', games)
-})
-// ABOUT PAGE
-app.get('/about', function (req, res) {
-  res.render('pages/about.ejs')
-})
-
-// MYGAMES PAGE
-app.get('/mygames', function (req, res) {
-  res.render('pages/mygames.ejs', games)
-})
-
-// POST FAVORITE GAME
-app.post('/', postGames)
-
-// CATCH REST REDIRECT TO HOME
-app.get('*', function (req, res) {
-  res.redirect('/')
-})
-
-// WHICH PORT
-app.listen(port)
-console.log(`Server is listening to ${port}`)
-
-// // FUNCTION: SAVING GAMES
-// function saveGame(testGame, cb) {
-//     fs.writeFile('./views/pages/game.json', JSON.stringify(testGame), cb);
-// }
-
-// // RESTful API manner
-// GET /events              // list the events
-// GET /events/:eventId     // get a single event by ID
-// POST /events             // add a new event
-// PUT /events/:eventId     // update an existing event
-// DELETE /events/:eventId  // remove an event
-
-// const path = require('path')
-// const ejs = require('ejs')
-// const fs = require('fs')
+  console.log(`Server is listening to ${port}`)

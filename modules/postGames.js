@@ -1,4 +1,5 @@
 const gamesModel = require('./gamesModel')
+// const alert = require('alert-node')
 
 function postGames (req, res) {
   const gameData = {
@@ -16,7 +17,8 @@ function postGames (req, res) {
       res.status(400).send('Games were not saved')
     } else {
       console.log('Games saved succesfully!')
-      res.send('Your games were succesfully uploaded to the database')
+      res.redirect('pages/home.ejs')
+      .send('Your games were saved')
     }
   })
 }
