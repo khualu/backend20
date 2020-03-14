@@ -1,3 +1,5 @@
+const games = require('./game.json')
+
 function getHome(req, res) {
     res.render('pages/index.ejs', games)
 }

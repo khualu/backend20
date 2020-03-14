@@ -11,9 +11,11 @@ const dbconnect = require('./modules/mongoCon')
 const postGames = require('./modules/postGames')
 const searchUser = require('./modules/searchUser')
 const getHome = require('./modules/getHome')
+const getMyGames = require('./modules/getMyGames')
+const postGamesDD = require('./modules/postGamesDD')
 
 // IMPORT GAMES.JSON FILE
-const games = require('./views/pages/game.json')
+const games = require('./modules/game.json')
 
 // DATA BASE CONNECTION
 dbconnect()
@@ -35,8 +37,9 @@ app
   .use(express.static('src'))
   .get('/', getHome)
   .get('/about', function (req, res) { res.render('pages/about.ejs') })
-  .get('/mygames', function (req, res) { res.render('pages/mygames.ejs', games) })
+  .get('/mygames', getMyGames)
   .post('/', postGames)
+  .post('/mygames', postGamesDD)
   .get('*', function (req, res) { res.redirect('/') })
   .listen(port)
 

@@ -9,6 +9,7 @@ function postGames (req, res) {
     titleGame3: req.body.titleGame3
   }
 
+  // eslint-disable-next-line new-cap
   const newFavGames = new gamesModel(gameData)
 
   newFavGames.save((err) => {
