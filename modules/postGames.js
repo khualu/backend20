@@ -18,7 +18,7 @@ function postGames (req, res) {
     } else {
       console.log('Games saved succesfully!')
       res.redirect('pages/home.ejs')
-      .send('Your games were saved')
+        .send('Your games were saved')
     }
   })
 }

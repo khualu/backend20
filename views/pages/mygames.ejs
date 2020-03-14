@@ -13,23 +13,38 @@
 
 	<main>
 			<h1>MY GAMES</h1>
-			<p>CHECK HERE YOUR FAVORITE GAMES</p>
+			<p>ADD YOUR FAVORITE GAMES</p>
 	</main>
 
-	<section id="topGames">
-		<h2>Your favorite games</h2>
-
-		<ul>
-			<li><%= titleGame1 %></li>
-			<li><%= titleGame2 %></li>
-			<li><%= titleGame3 %></li>
-		</ul>
-	</section>
 
 	<section>
 		<form action="/mygames" method="GET">
 			<label for="userName">Your username:</label>
 			<input type="text" id="userName" name="userName">
+
+			<label for="game1">Favorite game 1</label>
+			<select name="game1" id="game1">
+				<option value="Minecraft">Minecraft</option>
+				<option value="Red Dead Redemption 2">Red Dead Redemption 2</option>
+				<option value="The Legend of Zelda">The Legend of Zelda</option>
+				<option value="God of War">God of War</option>
+				<option value="Portal">Portal</option>
+				<option value="Grand Theft Auto">Grand Theft Auto</option>
+				<option value="Leauge of Legends">Leauge of Legends</option>
+				<option value="Stardew Valley">Stardew Valley</option>
+				<option value="Super Mario Odyssey">Super Mario Odyssey</option>
+				<option value="Rocket League">Rocket League</option>
+				<option value="Overwatch">Overwatch</option>
+				<option value="World of Warcraft">World of Warcraft</option>
+				<option value="Final Fantasy">Final Fantasy</option>
+				<option value="Half-life">Half-life</option>
+				<option value="DOOM">DOOM</option>
+				<option value="BioShock">BioShock</option>
+				<option value="Pokemon">Pokemon</option>
+				<option value="Call of Duty">Call of Duty</option>
+				<option value="The Elder Scrolls">The Elder Scrolls</option>
+				<option value="Mortal Kombat">Mortal Kombat</option>
+			</select>
 			<input type="submit">
 		</form>
 	</section>
