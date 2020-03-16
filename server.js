@@ -45,8 +45,8 @@ app
   .get('/matches', getMatches)
   .post('/', postGames)
   .post('/mygames', postGamesDD)
-  .get('/matches', searchUser)
-  // .get('*', function (req, res) { res.redirect('/') })
+  .post('/matches', searchUser)
+  .get('*', function (req, res) { res.redirect('/') })
   .listen(port)
 
 console.log(`Server is listening to ${port}`)
