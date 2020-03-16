@@ -1,6 +1,7 @@
 const gamesModel = require('./gamesModel')
 
 function searchUser (req, res) {
+  // let name = req.body.userNameMatches
   gamesModel.findOne({ userName: 'ANDY-MODULE-TEST' },
     function (err, gamesModel) {
       if (err) {
