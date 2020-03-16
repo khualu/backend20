@@ -15,6 +15,7 @@ const getMyGames = require('./modules/getMyGames')
 const postGamesDD = require('./modules/postGamesDD')
 const getMatches = require('./modules/getMatches')
 const getAbout = require('./modules/getAbout')
+const searchMatch = require('./modules/match')
 
 // IMPORT GAMES.JSON FILE
 // const games = require('./modules/game.json')
@@ -23,7 +24,10 @@ const getAbout = require('./modules/getAbout')
 dbconnect()
 
 // TESTING QUERIES
-searchUser()
+// searchUser()
+
+// TESTING MATCH FUNCTION
+searchMatch()
 
 // SERVER SETUP
 app
