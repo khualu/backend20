@@ -18,14 +18,8 @@ const getAbout = require('./modules/getAbout')
 const gamesModel = require('./modules/gamesModel')
 const match = require('./modules/match')
 
-// IMPORT GAMES.JSON FILE
-// const games = require('./modules/game.json')
-
 // DATA BASE CONNECTION
 dbconnect()
-
-// TESTING QUERIES
-// searchUser()
 
 // SERVER SETUP
 app
