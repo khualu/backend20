@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<%- include ('../partials/head') %>
+</head>
+
+<body class="container">
+
+	<header>
+		<%- include ('../partials/header') %>
+	</header>
+
+	<main>
+			<h1>MY MATCHES</h1>
+			<p>SEARCH FOR MATCHES ON YOUR USERNAME</p>
+    </main>
+    
+    <section>
+        <form action="/" method="GET">
+            <label for="userName">Your username:</label>
+            <input type="text" id="userName" name="userName">
+
+            <input type="submit">
+        </form>
+    </section>
+
+
+
+	<footer>
+		<%- include ('../partials/footer') %>
+	</footer>
+
+</body>
+
+</html>

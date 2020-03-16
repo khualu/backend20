@@ -13,9 +13,11 @@ const searchUser = require('./modules/searchUser')
 const getHome = require('./modules/getHome')
 const getMyGames = require('./modules/getMyGames')
 const postGamesDD = require('./modules/postGamesDD')
+const getMatches = require('./modules/getMatches')
+const getAbout = require('./modules/getAbout')
 
 // IMPORT GAMES.JSON FILE
-const games = require('./modules/game.json')
+// const games = require('./modules/game.json')
 
 // DATA BASE CONNECTION
 dbconnect()
@@ -36,8 +38,9 @@ app
   .set('view engine', 'ejs')
   .use(express.static('src'))
   .get('/', getHome)
-  .get('/about', function (req, res) { res.render('pages/about.ejs') })
+  .get('/about', getAbout)
   .get('/mygames', getMyGames)
+  .get('/matches', getMatches)
   .post('/', postGames)
   .post('/mygames', postGamesDD)
   .get('*', function (req, res) { res.redirect('/') })
