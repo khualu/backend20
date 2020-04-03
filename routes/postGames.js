@@ -1,4 +1,4 @@
-const gamesModel = require('./gamesModel')
+const gamesModel = require('../models/gamesModel')
 // const alert = require('alert-node')
 
 function postGames (req, res) {

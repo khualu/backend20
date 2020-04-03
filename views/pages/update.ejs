@@ -12,16 +12,14 @@
 	</header>
 
 	<main>
-			<h1>MY GAMES</h1>
-			<p>ADD YOUR FAVORITE GAMES</p>
+		<h1>MY MATCHES</h1>
+		<p>SEARCH FOR MATCHES ON YOUR USERNAME</p>
 	</main>
 
-
 	<section>
-		<form action="/mygames" method="POST">
-			<label for="userName">Your username:</label>
-			<input type="text" id="userName" name="userName">
-
+		<form action="/update" method="POST">
+			<label for="userName">Your username</label>
+			<input id="userName" name="userName" type="text">
 			<label for="dd_game1">Favorite game 1</label>
 			<select name="dd_game1" id="dd_game1">
 				<% for (x=0; x < top100Games.length; x++) { %>
