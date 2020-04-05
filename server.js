@@ -40,14 +40,3 @@ app
   .listen(port)
 
 console.log(`Server is listening to ${port}`)
-
-// .use(session({
-//   cookie: {
-//     maxAge: twoHours
-//   },
-//   sameSite: true,
-//   secret: process.env.SESS_SECRET,
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-// })

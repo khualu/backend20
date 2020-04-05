@@ -5,6 +5,7 @@ const fs = require('fs')
 // OWN FILES
 const gamesModel = require('../models/gamesModel')
 const top100Games = require('../api/outputGames.json')
+const onlineUser = require('../modules/user.json')
 
 router
   .get('/', (req, res) => {
@@ -20,7 +21,7 @@ router
   })
 
   .get('/profile', (req, res) => {
-    res.render('pages/profile', { top100Games })
+    res.render('pages/profile', { onlineUser, top100Games })
   })
 
   .post('/mygames', (req, res) => {
@@ -41,14 +42,11 @@ router
       }
     }
     )
-    // fs.writeFile('../modules/user.json', gameData.userName, (err) => {
-    //     if (err) throw err
-    //     console.log('The file has been saved')
-    // })
   })
 
   .post('/profile', (req, res) => {
     const name = req.body.userName
+    console.log(name)
 
     gamesModel.findOne({ userName: name }, (err, foundObject) => {
       if (err) {
@@ -62,12 +60,10 @@ router
           if (req.body.name) {
             foundObject.name = req.body.name
           }
-
           //   ZORGEN DAT GAME RENDER PLAATS VIND
-          const game = foundObject.titleGame1
-        //     https://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects
-        //   const item = top100Games.find(item => item.name === game)
-        //   res.render(game)
+          const userData = foundObject
+          console.log(userData)
+          res.render('pages/profile', { userData, top100Games })
         }
       }
     })
@@ -94,13 +90,13 @@ router
           if (req.body.dd_game1) {
             foundObject.titleGame1 = req.body.dd_game1
           }
-          // THEN
+
           foundObject.save((err, updatedObject) => {
             if (err) {
               console.log(err)
+              res.status(500).send()
             } else {
-              console.log('Your favorite game was updated')
-              updatedObject.save()
+              res.render('pages/index')
             }
           })
         }

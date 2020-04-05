@@ -13,17 +13,43 @@
 
 	<main>
             <h1>MY PROFILE</h1>
-            <form action="/profile" method="post">
-                <label for="userName">Your Username</label>
-                <input type="text" id="userName" name="userName">
+            <form action="/profile" method="POST">
+                <label for="userName">Your Username:</label>
+                <input name="userName" type="text" id="userName">
                 <input type="submit">
             </form>
     </main>
 
     <section>
-        <h2>Your favorite game:</h2> 
-    </section>
+        
+        <% if ( typeof userData != "undefined") { %>
+            <h2>Your data</h2>
+            <p>name: <%= userData.userName %></p>
+            <p>Favorite game: <%= userData.titleGame1 %></p>
+            <% 
+            // https://stackoverflow.com/questions/7364150/find-object-by-id-in-an-array-of-javascript-objects
+            const item = top100Games.find(item => item.name === userData.titleGame1)
 
+            const baseURL = "//images.igdb.com/igdb/image/upload/t_screenshot_huge/"
+            const nItems = item.screenshots.length
+
+            const randomNumer = Math.floor(Math.random() * nItems)
+
+            const hashImageId = item.screenshots[randomNumer].image_id
+            const jpgFormat = ".jpg"
+            const description = item.summary
+
+            const fullUrl = baseURL.concat(hashImageId, jpgFormat)
+            %>
+            <img src="<%= fullUrl %>" alt="">
+            <p> <%= description %></p>
+            
+        <% } else { %>
+            <h3>Look up your username to find your profile!</h3>
+       <% } %>
+
+
+    </section>
 
 	<footer>
 		<%- include ('../partials/footer') %>
